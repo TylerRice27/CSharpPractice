@@ -14,6 +14,7 @@ CREATE TABLE
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
         updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Updated',
         name VARCHAR(255) COMMENT 'City Name',
+        img VARCHAR(1000) COMMENT 'City image',
         creatorId VARCHAR(255) NOT NULL,
         Foreign Key (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
     ) DEFAULT charset utf8 COMMENT '';
