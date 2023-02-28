@@ -16,7 +16,7 @@ CREATE TABLE
         name VARCHAR(255) COMMENT 'City Name',
         img VARCHAR(1000) COMMENT 'City image',
         creatorId VARCHAR(255) NOT NULL,
-        Foreign Key (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
+        Foreign Key (creatorId) REFERENCES accounts(id) ON DELETE CASCADE
     ) DEFAULT charset utf8 COMMENT '';
 
 CREATE TABLE

@@ -12,12 +12,12 @@ namespace CSharpPractice.Repositories
         internal City Create(City cityData)
         {
             string sql = @"
-INSERT INTO cities
-(name, img, creatorId)
-VALUES
-(@Name, @Img, @CreatorId);
-SELECT LAST_INSERT_ID();
-";
+            INSERT INTO cities
+            (name, img, creatorId)
+            VALUES
+            (@Name, @Img, @CreatorId);
+            SELECT LAST_INSERT_ID();
+            ";
             int id = _db.ExecuteScalar<int>(sql, cityData);
             cityData.Id = id;
             return cityData;
