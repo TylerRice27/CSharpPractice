@@ -13,7 +13,9 @@ CREATE TABLE
         id INT NOT NULL AUTO_INCREMENT primary key COMMENT "city id primary key",
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
         updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Updated',
-        name VARCHAR(255) COMMENT 'City Name'
+        name VARCHAR(255) COMMENT 'City Name',
+        creatorId VARCHAR(255) NOT NULL,
+        Foreign Key (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
     ) DEFAULT charset utf8 COMMENT '';
 
 CREATE TABLE
@@ -21,7 +23,9 @@ CREATE TABLE
         id INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Team Id primary key",
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
         updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Updated',
-        name VARCHAR(500) COMMENT 'Team Name'
+        name VARCHAR(500) COMMENT 'Team Name',
+        creatorId VARCHAR(255) NOT NULL,
+        Foreign Key (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
     ) DEFAULT charset utf8 COMMENT '';
 
 CREATE TABLE
@@ -32,8 +36,10 @@ CREATE TABLE
         name VARCHAR(500) COMMENT 'Hero Name',
         img VARCHAR(2000) COMMENT 'Hero Image',
         bio VARCHAR(500) COMMENT 'Hero Bio',
+        creatorId VARCHAR(255) NOT NULL,
         cityId int NOT NULL,
         teamId int,
+        Foreign Key (creatorId) REFERENCES accounts(id) ON DELETE CASCADE,
         Foreign Key (cityId) REFERENCES cities(id) ON DELETE CASCADE,
         Foreign Key (teamId) REFERENCES teams(id) ON DELETE CASCADE
     ) DEFAULT charset utf8 COMMENT '';
