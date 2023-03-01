@@ -22,5 +22,19 @@ namespace CSharpPractice.Repositories
             cityData.Id = id;
             return cityData;
         }
+
+        internal List<City> Get()
+        {
+            string sql = @"
+            SELECT * FROM cities c
+            JOIN accounts a on a.id = c.creatorId;
+            ";
+            List<City> cities = _db.Query<City, Account, City>(sql, (city, account) =>
+            {
+                city.Creator = account;
+                return city;
+            }).ToList();
+            return cities;
+        }
     }
 }

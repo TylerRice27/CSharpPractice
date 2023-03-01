@@ -14,5 +14,11 @@ namespace CSharpPractice.Services
             City city = _repo.Create(cityData);
             return city;
         }
+
+        internal List<City> Get()
+        {
+            List<City> cities = _repo.Get();
+            return cities;
+        }
     }
 }

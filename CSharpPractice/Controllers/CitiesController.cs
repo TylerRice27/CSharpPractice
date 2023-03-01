@@ -34,6 +34,24 @@ namespace CSharpPractice.Controllers
 
         }
 
+        [HttpGet]
+
+        public async Task<ActionResult<List<City>>> Get()
+        {
+            try
+            {
+                Account userInfo = await _auth0provider.GetUserInfoAsync<Account>(HttpContext);
+                List<City> cities = _cs.Get();
+                return Ok(cities);
+
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
 
     }
 }
