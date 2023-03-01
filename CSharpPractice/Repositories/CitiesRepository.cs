@@ -26,7 +26,10 @@ namespace CSharpPractice.Repositories
         internal List<City> Get()
         {
             string sql = @"
-            SELECT * FROM cities c
+            SELECT 
+            c.*,
+            a.*
+            FROM cities c
             JOIN accounts a on a.id = c.creatorId;
             ";
             List<City> cities = _db.Query<City, Account, City>(sql, (city, account) =>
@@ -35,6 +38,24 @@ namespace CSharpPractice.Repositories
                 return city;
             }).ToList();
             return cities;
+        }
+
+        internal City GetOne(int id)
+        {
+            string sql = @"
+            SELECT
+            c.*,
+            a.*
+            FROM cities c
+            JOIN accounts a on a.id = c.creatorId
+            WHERE c.id = @id;
+            ";
+            return _db.Query<City, Account, City>(sql, (city, account) =>
+            {
+                city.Creator = account;
+                return city;
+            }, new { id }).FirstOrDefault();
+
         }
     }
 }

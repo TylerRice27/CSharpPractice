@@ -52,6 +52,23 @@ namespace CSharpPractice.Controllers
             }
         }
 
+        [HttpGet("{id}")]
+
+        public async Task<ActionResult<City>> GetOne(int id)
+        {
+            try
+            {
+                Account userInfo = await _auth0provider.GetUserInfoAsync<Account>(HttpContext);
+                City city = _cs.GetOne(id);
+                return Ok(city);
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
 
     }
 }

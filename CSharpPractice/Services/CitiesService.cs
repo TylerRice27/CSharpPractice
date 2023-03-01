@@ -18,7 +18,20 @@ namespace CSharpPractice.Services
         internal List<City> Get()
         {
             List<City> cities = _repo.Get();
+
             return cities;
+        }
+
+        internal City GetOne(int id)
+        {
+            City city = _repo.GetOne(id);
+            if (city == null)
+            {
+                throw new Exception("No City by that Id");
+
+            }
+
+            return city;
         }
     }
 }
