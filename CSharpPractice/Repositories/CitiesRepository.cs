@@ -57,5 +57,12 @@ namespace CSharpPractice.Repositories
             }, new { id }).FirstOrDefault();
 
         }
+
+        internal void Remove(int id)
+        {
+            string sql = @"DELETE FROM cities
+            WHERE id = @id;";
+            _db.Execute(sql, new { id });
+        }
     }
 }
