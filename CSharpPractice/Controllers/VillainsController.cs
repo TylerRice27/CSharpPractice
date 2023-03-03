@@ -65,6 +65,24 @@ namespace CSharpPractice.Controllers
             }
         }
 
+        [HttpPut("{id}")]
+        [Authorize]
+        public async Task<ActionResult<Villain>> Edit(int id, [FromBody] Villain updatedVillain)
+        {
+            try
+            {
+                Account userInfo = await _auth0provider.GetUserInfoAsync<Account>(HttpContext);
+                updatedVillain.Id = id;
+                Villain villain = _vs.Edit(updatedVillain, userInfo.Id);
+                return Ok(villain);
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpDelete("{id}")]
         [Authorize]
         public async Task<ActionResult<string>> Delete(int id)

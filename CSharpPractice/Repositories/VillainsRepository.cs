@@ -35,6 +35,21 @@ namespace CSharpPractice.Repositories
             _db.Execute(sql, new { villain.Id });
         }
 
+        internal void Edit(Villain originalVillain)
+        {
+            string sql = @"
+            UPDATE villains
+            SET
+            name = @Name,
+            bio = @Bio,
+            img = @Img,
+            cityId = @CityId,
+            updatedAt = @UpdatedAt
+            WHERE id = @id;
+            "; _db.Execute(sql, originalVillain);
+
+        }
+
         internal List<Villain> Get()
         {
             string sql = @"

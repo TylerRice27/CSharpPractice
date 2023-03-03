@@ -10,7 +10,7 @@ namespace CSharpPractice.Models
 
         public string Bio { get; set; }
 
-        public int cityId { get; set; }
+        public int? cityId { get; set; }
 
         public string CreatorId { get; set; }
 
