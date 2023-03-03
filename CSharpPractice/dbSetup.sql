@@ -45,7 +45,7 @@ CREATE TABLE
     ) DEFAULT charset utf8 COMMENT '';
 
 CREATE TABLE
-    IF NOT EXISTS villians(
+    IF NOT EXISTS villains(
         id INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Villian Id Primary Key",
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Time Created",
         updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Time Updated",

@@ -1,6 +1,6 @@
 namespace CSharpPractice.Models
 {
-    public class Villian
+    public class Villain
     {
         public int Id { get; set; }
 
