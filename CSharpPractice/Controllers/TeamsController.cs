@@ -50,6 +50,21 @@ namespace CSharpPractice.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Team>> GetOne(int id)
+        {
+            try
+            {
+                Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+                Team team = _ts.GetOne(id);
+                return team;
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 
 }

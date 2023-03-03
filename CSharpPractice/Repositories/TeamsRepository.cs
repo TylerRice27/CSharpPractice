@@ -36,5 +36,22 @@ namespace CSharpPractice.Repositories
             }).ToList();
             return teams;
         }
+
+        internal Team GetOne(int id)
+        {
+            string sql = @"
+            SELECT
+        t.*,
+        a.*
+        FROM teams t
+        JOIN accounts a ON a.id = t.CreatorId
+        WHERE t.id = @id;";
+            Team getOneTeam = _db.Query<Team, Profile, Team>(sql, (team, prof) =>
+            {
+                team.Creator = prof;
+                return team;
+            }, new { id }).FirstOrDefault();
+            return getOneTeam;
+        }
     }
 }

@@ -21,5 +21,16 @@ namespace CSharpPractice.Services
             List<Team> teams = _repo.Get();
             return teams;
         }
+
+        internal Team GetOne(int id)
+        {
+            Team team = _repo.GetOne(id);
+            if (team == null)
+            {
+                throw new Exception("Failed to locate Team");
+            }
+            return team;
+
+        }
     }
 }
