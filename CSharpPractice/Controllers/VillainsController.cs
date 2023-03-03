@@ -15,7 +15,8 @@ namespace CSharpPractice.Controllers
             _auth0provider = auth0provider;
         }
 
-
+        [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Villain>> Create([FromBody] Villain newVillain)
         {
             try
@@ -31,7 +32,7 @@ namespace CSharpPractice.Controllers
                 return BadRequest(e.Message);
             }
         }
-
+        [HttpGet]
         public async Task<ActionResult<List<Villain>>> Get()
         {
 

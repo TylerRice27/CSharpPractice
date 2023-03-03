@@ -13,10 +13,10 @@ namespace CSharpPractice.Repositories
         {
             string sql = @"
             INSERT INTO villains
-            (name, img, bio, cityId creatorId)
+            (name, img, bio, cityId, creatorId)
             VALUES
-            (@Name, @Img, @Bio, @CityId @CreatorId);
-            SELECT_LAST_INSERT_ID();
+            (@Name, @Img, @Bio, @CityId, @CreatorId);
+            SELECT LAST_INSERT_ID();
             ";
             int id = _db.ExecuteScalar<int>(sql, newVillain);
             newVillain.Id = id;
