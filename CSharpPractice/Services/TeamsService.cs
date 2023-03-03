@@ -16,6 +16,17 @@ namespace CSharpPractice.Services
             return team;
         }
 
+        internal string Delete(int id, string userId)
+        {
+            Team team = this.GetOne(id);
+            if (team.CreatorId != userId)
+            {
+                throw new Exception("You think you can stop this team");
+            }
+            _repo.Delete(id);
+            return $"{team.Name} has been eliminated";
+        }
+
         internal List<Team> Get()
         {
             List<Team> teams = _repo.Get();

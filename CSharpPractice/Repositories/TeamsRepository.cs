@@ -22,6 +22,15 @@ namespace CSharpPractice.Repositories
             return newTeam;
         }
 
+        internal void Delete(int id)
+        {
+            string sql = @"
+            DELETE FROM teams
+            WHERE id = @id;
+            ";
+            _db.Execute(sql, new { id });
+        }
+
         internal List<Team> Get()
         {
             string sql = @"SELECT 
