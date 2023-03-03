@@ -56,7 +56,7 @@ namespace CSharpPractice.Services
             }
             _repo.Remove(id);
 
-            return $"This {city.Name} has been removed";
+            return $"{city.Name} has been overrun by crime";
 
 
         }

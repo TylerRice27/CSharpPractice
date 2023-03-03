@@ -54,11 +54,11 @@ namespace CSharpPractice.Controllers
 
         [HttpGet("{id}")]
 
-        public ActionResult<City> GetOne(int id)
+        public async Task<ActionResult<City>> GetOneAsync(int id)
         {
             try
             {
-                // Account userInfo = await _auth0provider.GetUserInfoAsync<Account>(HttpContext);
+                Account userInfo = await _auth0provider.GetUserInfoAsync<Account>(HttpContext);
 
                 City city = _cs.GetOne(id);
                 return Ok(city);
