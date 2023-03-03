@@ -39,9 +39,34 @@ CREATE TABLE
         img VARCHAR(2000) COMMENT 'Hero Image',
         bio VARCHAR(500) COMMENT 'Hero Bio',
         creatorId VARCHAR(255) NOT NULL,
-        cityId int NOT NULL,
-        teamId int,
+        cityId INT NOT NULL,
         Foreign Key (creatorId) REFERENCES accounts(id) ON DELETE CASCADE,
-        Foreign Key (cityId) REFERENCES cities(id) ON DELETE CASCADE,
-        Foreign Key (teamId) REFERENCES teams(id) ON DELETE CASCADE
+        Foreign Key (cityId) REFERENCES cities(id) ON DELETE CASCADE
     ) DEFAULT charset utf8 COMMENT '';
+
+CREATE TABLE
+    IF NOT EXISTS villians(
+        id INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Villian Id Primary Key",
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Time Created",
+        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Time Updated",
+        name VARCHAR(500) COMMENT "Villian Name",
+        img VARCHAR(2000) COMMENT "Villian Img",
+        bio VARCHAR(500) COMMENT "Villian Bio",
+        creatorId VARCHAR(255) NOT NULL,
+        cityId INT NOT NULL,
+        Foreign Key (creatorId) REFERENCES accounts(id) ON DELETE CASCADE,
+        Foreign Key (cityId) REFERENCES cities(id) ON DELETE CASCADE
+    ) DEFAULT charset utf8 COMMENT '';
+
+CREATE TABLE
+    IF NOT EXISTS teamups(
+        id INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Teamup Id and Many to Many Realtionship",
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Time Created",
+        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Updated',
+        heroId INT,
+        teamId INT NOT NULL,
+        villianId INT,
+        FOREIGN KEY (heroId) REFERENCES heros(id) ON DELETE CASCADE,
+        FOREIGN KEY (teamId) REFERENCES teams(id) ON DELETE CASCADE,
+        /* Need to add villian table and added a many to many realtionship */
+    )

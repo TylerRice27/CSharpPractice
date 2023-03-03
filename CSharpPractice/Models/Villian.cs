@@ -1,15 +1,16 @@
 namespace CSharpPractice.Models
 {
-    public class Hero
+    public class Villian
     {
         public int Id { get; set; }
+
         public string Name { get; set; }
-        public string CreatorId { get; set; }
 
         public string Img { get; set; }
 
         public string Bio { get; set; }
-        public int CityId { get; set; }
+
+        public string CreatorId { get; set; }
 
         public DateTime CreatedAt { get; set; }
 
