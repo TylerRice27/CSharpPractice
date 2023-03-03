@@ -31,6 +31,19 @@ namespace CSharpPractice.Repositories
             _db.Execute(sql, new { id });
         }
 
+        internal Team Edit(Team team)
+        {
+            string sql = @"
+            UPDATE teams
+            SET
+            name = @Name,
+            img = @Img,
+            updatedAt = @UpdatedAt
+            WHERE id = @Id;
+            "; _db.Execute(sql, team);
+            return team;
+        }
+
         internal List<Team> Get()
         {
             string sql = @"SELECT 

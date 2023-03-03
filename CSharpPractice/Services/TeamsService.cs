@@ -27,6 +27,20 @@ namespace CSharpPractice.Services
             return $"{team.Name} has been eliminated";
         }
 
+        internal Team Edit(Team teamUpdate, string userId)
+        {
+            Team originalTeam = this.GetOne(teamUpdate.Id);
+            if (originalTeam.CreatorId != userId)
+            {
+                throw new Exception("You dont lead this team");
+            }
+            originalTeam.Name = teamUpdate.Name ?? originalTeam.Name;
+            originalTeam.Img = teamUpdate.Img ?? originalTeam.Img;
+
+            Team updatedTeam = _repo.Edit(originalTeam);
+            return updatedTeam;
+        }
+
         internal List<Team> Get()
         {
             List<Team> teams = _repo.Get();
