@@ -23,6 +23,18 @@ namespace CSharpPractice.Repositories
             return newVillain;
         }
 
+        internal void Delete(Villain villain)
+        {
+            string sql = @"
+            DELETE FROM villains
+            WHERE id = @id LIMIT 1
+            ";
+            // You can do villain.Id in your new object
+            // because you didn't send a id through has the argument
+            // If you send the whole object do this 
+            _db.Execute(sql, new { villain.Id });
+        }
+
         internal List<Villain> Get()
         {
             string sql = @"

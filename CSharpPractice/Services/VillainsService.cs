@@ -16,6 +16,7 @@ namespace CSharpPractice.Services
             return villain;
         }
 
+
         internal List<Villain> Get()
         {
             List<Villain> villains = _repo.Get();
@@ -26,6 +27,17 @@ namespace CSharpPractice.Services
         {
             Villain villain = _repo.GetOne(id);
             return villain;
+        }
+        internal string Delete(int id, string userId)
+        {
+            Villain villain = this.GetOne(id);
+            if (villain.CreatorId != userId)
+            {
+                throw new Exception("Your power is to weak to handle this threat");
+            }
+            _repo.Delete(villain);
+
+            return $"{villain.Name}'s justice has been served";
         }
     }
 }
