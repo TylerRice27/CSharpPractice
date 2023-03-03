@@ -39,5 +39,22 @@ namespace CSharpPractice.Repositories
             }).ToList();
             return villains;
         }
+
+        internal Villain GetOne(int id)
+        {
+            string sql = @"
+            SELECT
+            v.*,
+            a.*
+            FROM villains v
+            JOIN accounts a on a.id = v.CreatorId
+            WHERE v.id = @id;
+            ";
+            return _db.Query<Villain, Profile, Villain>(sql, (villain, prof) =>
+            {
+                villain.Creator = prof;
+                return villain;
+            }, new { id }).FirstOrDefault();
+        }
     }
 }

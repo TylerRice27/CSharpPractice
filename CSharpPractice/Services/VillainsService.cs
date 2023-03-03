@@ -21,5 +21,11 @@ namespace CSharpPractice.Services
             List<Villain> villains = _repo.Get();
             return villains;
         }
+
+        internal Villain GetOne(int id)
+        {
+            Villain villain = _repo.GetOne(id);
+            return villain;
+        }
     }
 }
