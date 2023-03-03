@@ -23,6 +23,19 @@ namespace CSharpPractice.Repositories
             return cityData;
         }
 
+        internal City Edit(City originalCity)
+        {
+            string sql = @"
+            update cities
+            SET
+            name = @Name,
+            img = @Img,
+            updatedAt = @UpdatedAt
+WHERE id = @Id;
+            "; _db.Execute(sql, originalCity);
+            return originalCity;
+        }
+
         internal List<City> Get()
         {
             string sql = @"
@@ -61,7 +74,7 @@ namespace CSharpPractice.Repositories
         internal void Remove(int id)
         {
             string sql = @"DELETE FROM cities
-            WHERE id = @id;";
+            WHERE id = @id LIMIT 1;";
             _db.Execute(sql, new { id });
         }
     }

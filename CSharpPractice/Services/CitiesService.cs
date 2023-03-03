@@ -15,6 +15,19 @@ namespace CSharpPractice.Services
             return city;
         }
 
+        internal City Edit(City updatedCity, string userId)
+        {
+            City originalCity = _repo.GetOne(updatedCity.Id);
+            if (originalCity.CreatorId != userId)
+            {
+                throw new Exception("This isnt your city to patrol");
+            }
+            originalCity.Name = updatedCity.Name ?? originalCity.Name;
+            originalCity.Img = updatedCity.Img ?? originalCity.Img;
+            City updatedInfo = _repo.Edit(originalCity);
+            return updatedInfo;
+        }
+
         internal List<City> Get()
         {
             List<City> cities = _repo.Get();
@@ -39,7 +52,7 @@ namespace CSharpPractice.Services
             City city = this.GetOne(id);
             if (city.CreatorId != userId)
             {
-                throw new Exception("You cant delete this city you didn't make it");
+                throw new Exception("You have failed this city!");
             }
             _repo.Remove(id);
 
