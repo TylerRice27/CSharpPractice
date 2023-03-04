@@ -47,5 +47,20 @@ namespace CSharpPractice.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Hero>> GetOne(int id)
+        {
+            try
+            {
+                Account userInfo = await _auth0provider.GetUserInfoAsync<Account>(HttpContext);
+                Hero hero = _hs.GetOne(id);
+                return Ok(hero);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }
