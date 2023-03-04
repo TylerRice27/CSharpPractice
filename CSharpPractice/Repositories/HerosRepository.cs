@@ -23,5 +23,21 @@ namespace CSharpPractice.Repositories
             newHero.Id = id;
             return newHero;
         }
+
+        internal List<Hero> Get()
+        {
+            string sql = @"
+            SELECT
+            h.*,
+            a.*
+            FROM heros h
+            JOIN accounts a ON a.id = h.CreatorId;
+            ";
+            return _db.Query<Hero, Profile, Hero>(sql, (hero, prof) =>
+            {
+                hero.Creator = prof;
+                return hero;
+            }).ToList();
+        }
     }
 }

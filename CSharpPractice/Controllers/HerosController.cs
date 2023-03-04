@@ -31,5 +31,21 @@ namespace CSharpPractice.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpGet]
+        public async Task<ActionResult<List<Hero>>> Get()
+        {
+            try
+            {
+                Account userInfo = await _auth0provider.GetUserInfoAsync<Account>(HttpContext);
+                List<Hero> heros = _hs.Get();
+                return Ok(heros);
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

@@ -14,5 +14,10 @@ namespace CSharpPractice.Services
             Hero hero = _repo.Create(newHero);
             return hero;
         }
+
+        internal List<Hero> Get()
+        {
+            return _repo.Get();
+        }
     }
 }
